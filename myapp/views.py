@@ -19,6 +19,7 @@ def webhook_handler(request):
         # Handle the webhook payload here
         # Example: process the payload and perform necessary actions
         event_type = request.headers.get('X-GitHub-Event')
+        print(payload)
         if event_type == 'pull_request':
             pull_request = payload['pull_request']
             id = pull_request['id']
@@ -51,7 +52,7 @@ def webhook_handler(request):
                 )
 
                 # Save the screenshot
-                new_pull_request.save_screenshot()
+                #new_pull_request.save_screenshot()
         # Return a response
         return HttpResponse(status=200)
     else:
