@@ -19,7 +19,7 @@ class PullRequest(models.Model):
     url = models.URLField()
     state = models.CharField(max_length=10, choices=STATE_CHOICES)
     title = models.CharField(max_length=255)
-    body = models.TextField()
+    body = models.TextField(null=True)
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField(default=None, null=True)
     merge_commit_sha = models.CharField(max_length=40, null=True)
