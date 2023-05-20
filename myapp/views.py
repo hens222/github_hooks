@@ -7,7 +7,6 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets
 from .models import PullRequest
 from .serializers import PullRequestSerializer
-import os
 from html2image import Html2Image
 from django.core.files.base import File
 from django.shortcuts import render
