@@ -121,7 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-CHROME_DRIVER='/home/ubuntu/chromedriver'
+CHROME_DRIVER='/usr/bin/google-chrome-stable'
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(ROOT_DIR, 'media')
