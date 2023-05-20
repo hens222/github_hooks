@@ -10,6 +10,7 @@ from .serializers import PullRequestSerializer
 import os
 from html2image import Html2Image
 from django.core.files.base import File
+from django.shortcuts import render
 
 
 def screen_shoot(url, id):
@@ -63,9 +64,10 @@ def webhook_handler(request):
         return HttpResponse(status=405)
 
 
-def index(request):
-    screen_shoot('https://www.urlbox.io/website-screenshots-django', 1)
-    return HttpResponse(status=200)
+
+def pull_request_list(request):
+    pull_requests = PullRequest.objects.all()
+    return render(request, 'pull_requests.html', {'pull_requests': pull_requests})
 
 
 class PullRequestViewSet(viewsets.ModelViewSet):
