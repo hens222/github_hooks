@@ -29,14 +29,14 @@ def screen_shoot(url, id):
 
         # Navigate to the URL
         driver.get(url)
-
+        file_name = "".join([id, '.png'])
         # Perform your desired actions with the page elements
         # For example, capture a screenshot
-        driver.save_screenshot("".join([id, '.png']))
+        driver.save_screenshot(file_name)
 
         # Close the browser
         driver.quit()
-        return os.path.join(os.getcwd(), 'screenshot.png')
+        return os.path.join(os.getcwd(), file_name)
     except:
         driver.quit()
         traceback.print_exc()
