@@ -23,10 +23,10 @@ def screen_shoot(url, id):
         chrome_options.add_argument("--disable-dev-shm-usage")
 
         # Create a new instance of the Chrome driver
-        path='home/ubuntu/chromedriver'
-        #driver = webdriver.Chrome(settings.CHROME_DRIVER, options=chrome_options)
+        #path='home/ubuntu/chromedriver'
+        driver = webdriver.Chrome(settings.CHROME_DRIVER, options=chrome_options)
 
-        driver = webdriver.Chrome(path, options=chrome_options)
+        #driver = webdriver.Chrome(path, options=chrome_options)
 
         # Set the desired URL to open
 
