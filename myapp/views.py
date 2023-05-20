@@ -7,43 +7,15 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets
 from .models import PullRequest
 from .serializers import PullRequestSerializer
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-import traceback
 import os
+from html2image import Html2Image
 
 
 def screen_shoot(url, id):
-    driver = None
-    try:
-        # Configure Chrome options
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")  # Run Chrome in headless mode
-        chrome_options.add_argument("--no-sandbox")
-        chrome_options.add_argument("--disable-dev-shm-usage")
-
-        # Create a new instance of the Chrome driver
-        #path='home/ubuntu/chromedriver'
-        driver = webdriver.Chrome(settings.CHROME_DRIVER, options=chrome_options)
-
-        #driver = webdriver.Chrome(path, options=chrome_options)
-
-        # Set the desired URL to open
-
-        # Navigate to the URL
-        driver.get(url)
-        file_name = "".join([id, '.png'])
-        # Perform your desired actions with the page elements
-        # For example, capture a screenshot
-        driver.save_screenshot(file_name)
-
-        # Close the browser
-        driver.quit()
-        return os.path.join(os.getcwd(), file_name)
-    except:
-        driver.quit()
-        traceback.print_exc()
-        return None
+    hti = Html2Image(browser_executable='/usr/bin/google-chrome-stable')
+    img = hti.screenshot(url='https://www.urlbox.io/', save_as='img.png')
+    pu = PullRequest.objects.get(id=id)
+    pu.image_file.save(id + '.png', img, save=True)
 
 
 @csrf_exempt
@@ -72,8 +44,6 @@ def webhook_handler(request):
                 existing_pull_request.updated_at = updated_at
                 existing_pull_request.save()
             except PullRequest.DoesNotExist:
-
-                url_screenshot = screen_shoot(url, id)
                 PullRequest.objects.create(
                     action=action,
                     id=id,
@@ -84,10 +54,9 @@ def webhook_handler(request):
                     created_at=datetime.strptime(pull_request['created_at'], "%Y-%m-%dT%H:%M:%SZ"),
                     updated_at=updated_at,
                     merge_commit_sha=pull_request['merge_commit_sha'],
-                    user=pull_request['user']['login'],
-                    screenshot=url_screenshot
+                    user=pull_request['user']['login']
                 )
-
+                url_screenshot = screen_shoot(url, id)
                 # Save the screenshot
                 # new_pull_request.save_screenshot()
         # Return a response
