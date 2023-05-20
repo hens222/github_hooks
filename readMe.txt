@@ -17,3 +17,9 @@ do git clone
 
 then type the command - pip install -r requirements.txt
 
+**there is a chance that the host url wont work beacase of biiling on aws
+send me an email and I will activate it
+
+demo repository - https://github.com/hens2013/demo-repository.git
+host link -  http://34.219.10.208:8000/
+
