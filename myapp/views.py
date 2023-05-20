@@ -13,8 +13,7 @@ from django.core.files.base import File
 
 
 def screen_shoot(url, id):
-   #hti = Html2Image(browser_executable='/usr/bin/google-chrome-stable')
-    hti=Html2Image()
+    hti = Html2Image(browser_executable='/usr/bin/google-chrome-stable')
     img = hti.screenshot(url=url, save_as='img.png')
     pu = PullRequest.objects.get(id=id)
     pu.screenshot.save(str(id) + '.png', File(open(img[0], 'rb')))
