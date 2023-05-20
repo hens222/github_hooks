@@ -81,3 +81,4 @@ websockets==8.1
 wsproto==1.1.0
 zipp==3.4.1
 zope.interface==5.4.0
+html2image==2.0.3
