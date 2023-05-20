@@ -9,13 +9,15 @@ from .models import PullRequest
 from .serializers import PullRequestSerializer
 import os
 from html2image import Html2Image
+from django.core.files.base import File
 
 
 def screen_shoot(url, id):
-    hti = Html2Image(browser_executable='/usr/bin/google-chrome-stable')
-    img = hti.screenshot(url='https://www.urlbox.io/', save_as='img.png')
+   #hti = Html2Image(browser_executable='/usr/bin/google-chrome-stable')
+    hti=Html2Image()
+    img = hti.screenshot(url=url, save_as='img.png')
     pu = PullRequest.objects.get(id=id)
-    pu.screenshot.save(str(id) + '.png', img, save=True)
+    pu.screenshot.save(str(id) + '.png', File(open(img[0], 'rb')))
 
 
 @csrf_exempt
@@ -63,6 +65,7 @@ def webhook_handler(request):
 
 
 def index(request):
+    screen_shoot('https://www.urlbox.io/website-screenshots-django', 1)
     return HttpResponse(status=200)
 
 
