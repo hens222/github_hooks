@@ -67,7 +67,7 @@ def webhook_handler(request):
 
 def pull_request_list(request):
     pull_requests = PullRequest.objects.all()
-    return render(request, 'pull_requests.html', {'pull_requests': pull_requests})
+    return render(request, 'pull_requests_display.html', {'pull_requests': pull_requests})
 
 
 class PullRequestViewSet(viewsets.ModelViewSet):
