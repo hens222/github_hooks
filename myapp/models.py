@@ -24,7 +24,7 @@ class PullRequest(models.Model):
     updated_at = models.DateTimeField(default=None, null=True)
     merge_commit_sha = models.CharField(max_length=40, null=True)
     user = models.CharField(max_length=100)
-    screenshot = models.ImageField(upload_to='pull_request_screenshots/', null=True, blank=True)
+    screenshot = models.URLField(null=True)
 
     class Meta:
         db_table = 'pull_requests'
