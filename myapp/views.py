@@ -15,7 +15,7 @@ def screen_shoot(url, id):
     hti = Html2Image(browser_executable='/usr/bin/google-chrome-stable')
     img = hti.screenshot(url='https://www.urlbox.io/', save_as='img.png')
     pu = PullRequest.objects.get(id=id)
-    pu.screenshot.save(id + '.png', img, save=True)
+    pu.screenshot.save(str(id) + '.png', img, save=True)
 
 
 @csrf_exempt
